@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, AppRegistry, Image, Dimensions } from 'react-native';
+import { ActivityIndicator, ListView, Text, View, AppRegistry, Image, ToolbarAndroid, StyleSheet, Dimensions } from 'react-native';
 
 export default class reactTutorialApp extends Component {
     constructor(props) {
@@ -30,20 +30,34 @@ export default class reactTutorialApp extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-          <ActivityIndicator />
+          <ToolbarAndroid title="AwesomeApp" titleColor='white' style={{height: 56, backgroundColor: '#2196F3', elevation: 4}} />
+          <ActivityIndicator color = '#bc2b78' size = "large" style = {styles.activityIndicator}/>
         </View>
       );
     }
 
     return (
       <View>
+      <ToolbarAndroid title="AwesomeApp" titleColor='white' style={{height: 56, backgroundColor: '#2196F3', elevation: 4}} />
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Image source={{uri:'https://image.tmdb.org/t/p/w500_and_h281_bestv2'+rowData.poster_path}} resizeMode='cover' style= {{ height:300, width: 300 }} />}
+          renderRow={(rowData) => <Image source={{uri:'https://image.tmdb.org/t/p/w500_and_h281_bestv2'+rowData.poster_path}} resizeMode='cover' style= {{ height:300, width: Dimensions.get('window').width, marginTop: 20}} />}
         />
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create ({
+   activityIndicator: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 80,
+      marginTop: 50
+   }
+})
+
 
 AppRegistry.registerComponent('reactTutorialApp', () => reactTutorialApp);
